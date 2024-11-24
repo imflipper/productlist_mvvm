@@ -16,29 +16,32 @@ struct ProductListView: View {
             VStack {
                 if let errorMessage = viewModel.errorMessage {
                     Text(errorMessage)
-                        .foregroundColor(.red)
-                        .textScale(.secondary)
+                        .foregroundColor(.white)
                         .multilineTextAlignment(.center)
-                        .background(Color.red.opacity(0.2))
-                        .padding(.top, 5)
+                        .padding(8)
+                        .background(.red)
+                        .cornerRadius(5)
                 }
                 if viewModel.cells.isEmpty {
                     createProgressStack()
                 } else {
                     List(viewModel.cells) { vm in
-                        self.createProductCell(vm: vm).transition(.scale)
+                        self.createProductCell(vm: vm)
+                            .listRowBackground(Color.white)
                     }
+                    .scrollContentBackground(.hidden)
+                    .background(viewModel.backgroundColor)
                 }
             }
-            .animation(.easeInOut(duration: 0.2), value: viewModel.cells)
-            .navigationTitle("Products")
+            .animation(.easeInOut(duration: 0.3), value: viewModel.cells)
+            .navigationTitle(viewModel.navBarTitle)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewModel.loadProducts()
             }
             .refreshable {
                 viewModel.refreshProducts()
-            }
+            }.background(viewModel.backgroundColor)
         }
         
     }

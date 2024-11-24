@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 class ProductCellVM: ObservableObject, Identifiable, Equatable {
     
@@ -51,11 +50,13 @@ class ProductCellVM: ObservableObject, Identifiable, Equatable {
             isLoading = true
             hasError = false
         }
+        
         imageLoadingTask?.start()
         do {
             guard let data = try await imageLoadingTask?.task?.value else {
                 throw URLError(.badServerResponse)
             }
+            
             let resizedImage = try await resizeImage(data: data ?? Data())
             
             await MainActor.run {

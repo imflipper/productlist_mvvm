@@ -13,7 +13,8 @@ class ProductListViewModel: ObservableObject {
     @Published var cells: [ProductCellVM] = []
     @Published var errorMessage: String? = nil
     private lazy var worker: ProductListWorking = ProductListWorker(network: NetworkService())
-    
+    let backgroundColor: Color = Color.black.opacity(0.05)
+    let navBarTitle = "Product List"
     func refreshProducts() {
         worker.clear()
         cells.removeAll()
