@@ -36,26 +36,28 @@ struct ProductCell: View {
     }
     
     @ViewBuilder
-        private var imageSection: some View {
-            HStack {
-                Spacer()
-                if viewModel.isLoading {
-                    ProgressView().frame(width: constants.imageSize.width, height: constants.imageSize.height)
-                } else if let image = viewModel.image {
-                    image.aspectRatio(contentMode: .fit)
-                } else if viewModel.hasError {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundColor(.red)
-                        .frame(width: constants.imageSize.width, height: constants.imageSize.height)
-                        .onTapGesture {
-                            Task { await viewModel.loadImage() }
-                        }
-                    
-                } else {
-                    Color.clear
-                        .frame(width: constants.imageSize.width, height: constants.imageSize.height)
-                }
-                Spacer()
+    private var imageSection: some View {
+        HStack {
+            Spacer()
+            if viewModel.isLoading {
+                ProgressView().frame(width: constants.imageSize.width, height: constants.imageSize.height)
+            } else if let image = viewModel.image {
+                image.aspectRatio(contentMode: .fit)
+            } else if viewModel.hasError {
+                Image(systemName: "arrow.clockwise")
+                    .foregroundColor(.red)
+                    .frame(width: constants.imageSize.width, height: constants.imageSize.height)
+                    .onTapGesture {
+                        Task { await viewModel.loadImage() }
+                    }
+                
+            } else {
+                Color.clear
+                    .frame(width: constants.imageSize.width, height: constants.imageSize.height)
             }
+            Spacer()
         }
+    }
+    
 }
+

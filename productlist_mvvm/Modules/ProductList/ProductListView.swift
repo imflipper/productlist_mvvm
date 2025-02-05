@@ -27,7 +27,6 @@ struct ProductListView: View {
                 } else {
                     List(viewModel.cells) { vm in
                         self.createProductCell(vm: vm)
-                            .listRowBackground(Color.white)
                     }
                     .scrollContentBackground(.hidden)
                     .background(viewModel.backgroundColor)
@@ -69,3 +68,6 @@ extension ProductListView {
 }
 
 
+#Preview {
+    ProductListView()
+}

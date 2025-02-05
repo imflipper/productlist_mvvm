@@ -52,6 +52,59 @@ class ProductListViewModel: ObservableObject {
         }
     }
     
+    
+    // Структура
+    struct MyStruct {
+        var value: Int
+    }
+
+    // Класс
+    class MyClass {
+        var value: Int
+        
+        init(value: Int) {
+            self.value = value
+        }
+    }
+
+    // Функция для тестирования производительности структуры
+    func testStructPerformance() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        var structs = [MyStruct]()
+        for i in 0..<1000000 {
+            structs.append(MyStruct(value: i))
+        }
+        
+        // Изменение значений в массиве
+        for i in 0..<1000000 {
+            structs[i].value += 1
+        }
+        
+        let endTime = CFAbsoluteTimeGetCurrent()
+        print("Struct performance time: \(endTime - startTime) seconds")
+    }
+
+    // Функция для тестирования производительности класса
+    func testClassPerformance() {
+        let startTime = CFAbsoluteTimeGetCurrent()
+        
+        var classes = [MyClass]()
+        for i in 0..<1000000 {
+            classes.append(MyClass(value: i))
+        }
+        
+        // Изменение значений в массиве
+        for i in 0..<1000000 {
+            classes[i].value += 1
+        }
+        
+        let endTime = CFAbsoluteTimeGetCurrent()
+        print("Class performance time: \(endTime - startTime) seconds")
+    }
+
+    
+    
 }
 
 
